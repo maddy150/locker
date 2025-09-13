@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Stay Locked Prototype</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+<h1>Get Locked With Us</h1>
+<img src="{{ url_for('static', filename='assets/logo.png') }}" width="120">
+
+<!-- Scan ID -->
+<button id="scan-btn" class="btn-blue">Scan ID</button>
+<p>Or enter roll manually:</p>
+<input type="text" id="manual-roll" placeholder="Enter Roll">
+<button id="manual-submit" class="btn-teal">Submit</button>
+
+<p>Roll Number: <span id="roll">None</span></p>
+<p>Email: <span id="email"></span></p>
+
+<div id="otp-section" class="hidden">
+  <input type="text" id="otp-input" placeholder="Enter OTP">
+  <button id="verify-otp" class="btn-green">Verify OTP</button>
+</div>
+
+<div id="pin-section" class="hidden">
+  <input type="password" id="pin" placeholder="Enter PIN">
+  <input type="password" id="pin-confirm" placeholder="Re-enter PIN">
+  <button id="lock-btn" class="btn-red">Lock Locker</button>
+</div>
+
+<div id="unlock-section" class="hidden">
+  <input type="text" id="locker-unlock" placeholder="Locker Number">
+  <input type="password" id="pin-unlock" placeholder="Enter PIN">
+  <button id="unlock-btn" class="btn-green">Unlock Locker</button>
+</div>
+
+<h2>Lockers</h2>
+<div id="lockers">
+  {% for lid,data in lockers.items() %}
+  <div class="locker {{data['status']}}" id="{{lid}}">
+    {{lid}}<br>Status: {{data['status']}}<br>
+    Countdown: <span class="countdown">00:00:00</span>
+  </div>
+  {% endfor %}
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
