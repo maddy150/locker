@@ -47,6 +47,7 @@ if roll_number:
                 locker["pin"] = None
                 locker["timer"] = 0
                 st.success(f"{assigned_locker} unlocked!")
+                st.experimental_rerun()  # Refresh page to show updated locker status
             else:
                 st.error("Wrong PIN")
     else:
@@ -88,6 +89,7 @@ if roll_number:
                             locker["timer"] = 3.5 * 60 * 60  # 3.5 hours
                             st.success(f"Locker assigned: {lid}")
                             assigned = True
+                            st.experimental_rerun()  # Refresh page to show updated locker status
                             break
                     if not assigned:
                         st.error("All lockers are occupied")
